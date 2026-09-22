@@ -1,105 +1,92 @@
 # Finovate Measurements (source for spacing + motion tokens)
 
-> ## ⛔ CAPTURE BLOCKED — egress policy (2026-09-22)
-> §9 step 1's live capture **could not run in this environment**. The session's outbound
-> HTTPS goes through a policy-enforcing proxy whose allow-list covers only package
-> registries (npm, PyPI, crates, …), the Anthropic API and GitHub. Every general host —
-> `finovate.vamtam.com`, `vamtam.com`, even `example.com` — is denied at CONNECT with
-> HTTP 403 (org egress policy). Confirmed via `curl` and the proxy status endpoint
-> (`recentRelayFailures`: `connect_rejected … finovate.vamtam.com:443`). Per the proxy
-> README, policy denials must not be retried or routed around.
+> **Captured values supplied via YSL build handoff (2026-09-22).** The live-demo
+> Playwright capture (§9 step 1) is still blocked in this environment (egress policy
+> denies `finovate.vamtam.com`), but the handoff provided real measured values from
+> the live demo at 1440px & 375px. Those are transcribed below and applied to
+> `assets/css/site.css` `:root`. Full-page Finovate reference screenshots live in
+> `reference/finovate/` (git-ignored). H3/H4 sizes and scroll-reveal timing are the
+> only values NOT in the handoff — they are marked *(derived)* and remain to be
+> confirmed visually.
 >
-> **Consequence:** no screenshots, no computed styles, no `docs/finovate-raw-measurements.json`.
-> The measurement tables below stay `[[TODO: measure]]`. `assets/css/site.css` ships with a
-> clearly-labelled **placeholder** spacing/motion scale (built only from the constants the
-> brief itself states — container 1280px, breakpoints 1024/767px, 100px pills, square cards —
-> plus a conventional modular scale), NOT from measured Finovate values. These tokens are the
-> single point to correct once real measurements exist.
->
-> **To unblock (either):**
-> 1. Re-run this task in an environment whose network policy allows `finovate.vamtam.com`
->    (and its asset host). Then: `npm i -D playwright` and `node tools/finovate-measure.mjs`,
->    transcribe distilled values into the tables below, and update the `:root` tokens in
->    `site.css` marked `/* PLACEHOLDER … */`.
-> 2. Or capture the demo locally (any machine with internet), commit
->    `docs/finovate-raw-measurements.json` + `reference/*.png`, and I'll transcribe.
-
-Per CLAUDE.md §9 step 1. **All values below are `[[TODO: measure]]` until captured from the live demo**
-(https://finovate.vamtam.com) with Playwright once web egress is enabled — see `tools/finovate-measure.mjs`.
-Only sections we KEEP (per `docs/layout-reference.md`) are measured. No value here may be invented; unmeasured
-tokens must not ship silently.
-
-Capture at breakpoints **1440px** and **390px** (theme breakpoints 1024 / 767 also noted where they differ).
-Raw output lands in `docs/finovate-raw-measurements.json`; distilled tokens are transcribed here, then fed into
-`assets/css/site.css` `:root`.
+> ⚠️ **Two contradictions between the handoff's numbers and its own screenshots**
+> (flagged to the user, awaiting confirmation):
+> 1. **Button shape.** Handoff says buttons are square (0px). Every reference
+>    screenshot shows **rounded pill** buttons. Applied **square 0px** per the
+>    explicit written instruction; one-token reversal if it was a slip.
+> 2. **Header colour.** Handoff says the header turns **solid `--ink` (dark)**.
+>    The screenshots show a **light/cream** header with dark nav text. Kept the
+>    **light** header (matches screenshots); hide-on-scroll behaviour applied.
 
 ---
 
-## Global (measure once)
-| Token | 1440px | 390px | Notes |
-|---|---|---|---|
-| Container max-width | `[[TODO]]` (brief states 1280) | — | content width |
-| Page side gutter | `[[TODO]]` | `[[TODO]]` | |
-| Header height — normal | `[[TODO]]` | `[[TODO]]` | |
-| Header height — scrolled | `[[TODO]]` | `[[TODO]]` | sticky shrink target |
-| Header scroll trigger point | `[[TODO]]` | | px scrolled before shrink/bg change |
-| Section padding — top/bottom (default) | `[[TODO]]` | `[[TODO]]` | the section rhythm |
-| Section padding — compact variant | `[[TODO]]` | `[[TODO]]` | if any |
-| Grid column gap | `[[TODO]]` | `[[TODO]]` | |
-| Grid row gap | `[[TODO]]` | `[[TODO]]` | |
+## 1. Typography (measured — 1440 / 375)
+Family is YSL's: **Sora** headings, **IBM Plex Sans** body (self-hosted). Sentence
+case except the 11px eyebrow. Headings are **light (weight 400)**, line-height ~1.1.
+Body line-height 1.4.
 
-## Cards & tiles
-| Token | 1440px | 390px | Notes |
-|---|---|---|---|
-| Practice-area card — padding | `[[TODO]]` | `[[TODO]]` | corners: SQUARE (YSL, not Finovate 9px) |
-| Practice-area card — min height / ratio | `[[TODO]]` | `[[TODO]]` | |
-| Partner card — dimensions / image ratio | `[[TODO]]` | `[[TODO]]` | |
-| Related card — dimensions | `[[TODO]]` | `[[TODO]]` | |
-| Grid columns (practice areas) | `[[TODO]]` | `[[TODO]]` | e.g. 3 / 2 / 1 |
-
-## Buttons & pills
-| Token | Value | Notes |
-|---|---|---|
-| Button padding (x / y) | `[[TODO]]` | |
-| Button height | `[[TODO]]` | |
-| Button radius | `[[TODO]]` | pill (brief: 100px) |
-| Pill/chip padding | `[[TODO]]` | Authorities & Forums chips |
-| Pill radius | `[[TODO]]` | 100px |
-
-## Type scale (relative sizes + line-heights, per breakpoint)
-Follow Finovate's RHYTHM, adjusted for Sora/IBM Plex Sans. **Never** its uppercase transform.
-| Role | 1440 size / line-height | 390 size / line-height |
-|---|---|---|
-| H1 | `[[TODO]]` | `[[TODO]]` |
-| H2 | `[[TODO]]` | `[[TODO]]` |
-| H3 | `[[TODO]]` | `[[TODO]]` |
-| H4 | `[[TODO]]` | `[[TODO]]` |
-| Body | `[[TODO]]` | `[[TODO]]` |
-| Small / caption | `[[TODO]]` | `[[TODO]]` |
-
-## Motion (record property · duration · easing · delay/stagger)
-Only for kept sections. Respect `prefers-reduced-motion` (all off).
-| Interaction | Property | Duration | Easing | Delay / stagger | Notes |
+| Role | Desktop (1440) | Mobile (375) | Weight | Case | Token |
 |---|---|---|---|---|---|
-| Sticky header shrink/bg | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | trigger point above |
-| Nav hover / active | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | |
-| Button hover (+ arrow) | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | |
-| Card hover (practice / partner / related) | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | |
-| Scroll-in reveal (section/card) | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | start offset + entrance distance |
-| Mobile menu open/close | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | |
-| Link / pill hover | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | |
-| Form field focus | `[[TODO]]` | `[[TODO]]` | `[[TODO]]` | — | |
+| Hero heading (home) | 58px / lh 58 (1.0) | 32px / lh 38.4 | 500 | none | `--fs-hero` |
+| Display heading (section) | 52px / lh 57.2 (1.1) | 32px / lh 38.4 | 400 | none | `--fs-h1` |
+| Page title (inner hero) | 52px / lh 57.2 | 32px / lh 38.4 | 400 | none | `--fs-h1` |
+| Sub-heading (service section) | 48px / lh 57.6 (1.2) | 28px / lh 36.4 | 400 | none | `--fs-h2` |
+| Contact title | 48px | 28px | 400 | none | `--fs-h2` |
+| Card / minor heading *(derived)* | ~24px | ~20px | 400 | none | `--fs-h3` |
+| Small heading *(derived)* | ~20px | ~18px | 500 | none | `--fs-h4` |
+| Eyebrow label | 11px / lh 19.8 | 11px | 500 | **UPPERCASE** | `--fs-eyebrow` |
+| Body | 16px / lh 22.4 (1.4) | 16px | 400 | none | `--fs-body` |
+| Body (service/inner pages) | 18px / lh 25.2 (1.4) | 18px | 400 | none | `--fs-body-lg` |
+
+## 2. Buttons (measured)
+- Padding: **18px top / 20px sides / 20px bottom** → `--btn-pad: 18px 20px 20px`.
+- Border-radius: **0px (square)** → `--radius-btn: 0`. *(Contradicts screenshots — see box above.)*
+- Transition: **0.3s** → `--dur: 300ms`.
+- **Chips** (Authorities & Forums) stay **pill** (`--radius-pill: 100px`), per CLAUDE.md §5
+  and the screenshots.
+
+## 3. Colour & section rhythm (measured)
+- YSL palette unchanged: `--ink #111`, `--cream #F5EDE6`, `--paper` near-white, `--accent` orange.
+- Sections are **full-bleed backgrounds with a boxed 1280 inner container**, alternating
+  **paper/white ↔ cream**, with occasional **dark (`--ink`) bands** for emphasis.
+  (Finovate uses `#F6F5F2` light + `#1C4B42` dark band → mapped to YSL paper/cream/ink.)
+
+## 4. Header (measured)
+- **Desktop:** home **110px**, starts transparent, turns solid on scroll-up reveal;
+  inner pages **80px** solid. **Hides on scroll-down, reveals on scroll-up.**
+  Transitions: `transform / top / opacity 0.15s linear`, `background-color 0.35s`.
+  No shadow, no blur. → `--header-h: 80px`, `--header-h-home: 110px`,
+  `--dur-header: 150ms`, `--dur-header-bg: 350ms`.
+- **Mobile:** **~66px**, solid, fixed, always visible → `--header-h-mobile: 66px`.
+- No `backdrop-filter` (correct; removed in Milestone 1). *(Colour: kept light per
+  screenshots — see box above.)*
+
+## 5. Layout & spacing (measured)
+- **Content container: 1280px** (→ 80px gutter each side at 1440 via auto-margins) → `--container: 1280px`.
+- **Half-column ~630px** for two-up rows inside the container.
+- **Section vertical padding (desktop):** outer sections **~48px**, hero/feature **~50px**,
+  inner sub-blocks **~30px**, thin accent/stat bands **~20px**. Adjacent sections stack to a
+  **~70–80px visual gap** — the target rhythm. →
+  `--section-pad-y: clamp(30px, 3.3vw, 48px)`, `--section-pad-y-sm: clamp(20px, 2.2vw, 30px)`.
+- **Mobile section padding:** ~30px outer / ~20px inner.
+- **Cards:** `32px` padding / `24px` gap → `--card-pad: 32px`, `--grid-gap: 24px`. Corners
+  **square** (YSL brand; Finovate's own cards are ~9px rounded).
+- Breakpoints: **1024px** and **767px**.
+
+## 6. Motion
+| Interaction | Duration | Easing | Notes |
+|---|---|---|---|
+| Button / link / card hover | 300ms | ease-out | measured 0.3s |
+| Header hide/reveal (transform, opacity) | 150ms | linear | measured |
+| Header background change | 350ms | — | measured |
+| Mobile menu open/close | ~300ms | ease-in-out | tune vs demo |
+| Scroll-in reveal *(derived)* | ~500ms | ease-out | offset/stagger not in handoff — confirm visually |
+
+All motion respects `prefers-reduced-motion` (off).
 
 ---
 
-## Per-page section confirmation
-Confirm each KEEP section from `layout-reference.md` renders as expected on the live demo, and note the exact
-demo URL captured (the §9 list uses generic paths; real URLs to be recorded on first capture):
-- [ ] Home (Consulting) — `[[TODO: url]]`
-- [ ] Services / Practice-areas hub — `[[TODO: url]]`
-- [ ] Single service — `[[TODO: url]]`
-- [ ] About / The Firm — `[[TODO: url]]`
-- [ ] About → Team — `[[TODO: url]]`
-- [ ] Industries / Clients — `[[TODO: url]]`
-- [ ] About → Careers — `[[TODO: url]]`
-- [ ] Contact — `[[TODO: url]]`
+## Per-page reference screenshots (in `reference/finovate/`)
+`home-desktop-2`, `home-mobile-1/3/5`, `service-single-desktop`, `service-single-mobile-1/2`,
+`team-desktop`, `contact-desktop`, `contact-mobile-1/2/3`. Match spacing/whitespace/proportion
+to these by eye; the numbers above are the anchors.

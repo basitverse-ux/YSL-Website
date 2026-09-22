@@ -74,8 +74,9 @@
   --accent-ink:    #111111;         /* readable text colour to sit ON --accent */
   --focus-ring:    var(--accent);
 
-  /* ---- Typography — YSL (§5): geometric sans headings, humanist sans body,
-          sentence case. NEVER Finovate's uppercase / Bebas Neue. -------------- */
+  /* ---- Typography — YSL fonts (Sora / IBM Plex Sans), Finovate MEASURED scale.
+          Headings are LIGHT (weight 400), line-height ~1.1, sentence case.
+          Only the 11px eyebrow is uppercase. Body line-height 1.4. ------------- */
   --font-head: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
@@ -83,35 +84,38 @@
   --fw-medium: 500;
   --fw-semi:   600;
   --fw-bold:   700;
+  --fw-heading: 400;   /* headings are LIGHT (measured) */
+  --fw-hero:    500;   /* home hero heading only (measured) */
 
-  /* Fluid type scale — PLACEHOLDER rhythm (major-third-ish), tuned for Sora/Plex.
-     Sizes clamp between the 390px and 1440px targets. Replace ratios/anchors
-     with Finovate's measured type scale (§9) when available. */
-  --fs-h1:    clamp(2.10rem, 1.30rem + 3.6vw, 3.75rem);  /* PLACEHOLDER */
-  --fs-h2:    clamp(1.70rem, 1.15rem + 2.4vw, 2.75rem);  /* PLACEHOLDER */
-  --fs-h3:    clamp(1.35rem, 1.05rem + 1.3vw, 1.90rem);  /* PLACEHOLDER */
-  --fs-h4:    clamp(1.15rem, 1.00rem + 0.7vw, 1.40rem);  /* PLACEHOLDER */
-  --fs-body:  1.0625rem;                                 /* 17px */
-  --fs-small: 0.875rem;                                  /* 14px */
-  --fs-eyebrow: 0.78rem;
+  /* MEASURED type scale — sizes clamp between 375px and 1440px targets.
+     Anchors from the handoff (see docs/finovate-measurements.md §1). */
+  --fs-hero:  clamp(2rem,    1.43rem + 2.44vw, 3.625rem); /* 32 → 58 (home hero) */
+  --fs-h1:    clamp(2rem,    1.56rem + 1.88vw, 3.25rem);  /* 32 → 52 (display / page title) */
+  --fs-h2:    clamp(1.75rem, 1.31rem + 1.88vw, 3rem);     /* 28 → 48 (section sub-heading) */
+  --fs-h3:    clamp(1.25rem, 1.16rem + 0.38vw, 1.5rem);   /* 20 → 24 (derived — card/minor heading) */
+  --fs-h4:    clamp(1.125rem,1.06rem + 0.28vw, 1.25rem);  /* 18 → 20 (derived) */
+  --fs-body:    1rem;         /* 16px (measured) */
+  --fs-body-lg: 1.125rem;     /* 18px — service / inner pages (measured) */
+  --fs-small:   0.875rem;     /* 14px */
+  --fs-eyebrow: 0.6875rem;    /* 11px (measured) */
 
-  --lh-tight: 1.12;   /* headings */
-  --lh-snug:  1.30;
-  --lh-body:  1.65;   /* PLACEHOLDER — confirm against measured line-length */
+  --lh-hero:    1.0;    /* 58/58 (measured) */
+  --lh-heading: 1.1;    /* ~1.1 (measured) */
+  --lh-snug:    1.3;
+  --lh-body:    1.4;    /* 22.4/16 (measured) */
 
-  --ls-tight:  -0.01em;
-  --ls-eyebrow: 0.14em;   /* letter-spacing for small eyebrow labels */
+  --ls-tight:   0em;    /* headings sit at normal tracking (measured feel) */
+  --ls-eyebrow: 0.12em; /* letter-spacing for the 11px uppercase eyebrow */
 
-  /* ---- Layout constants — Finovate (brief-stated, safe to use now) ---------- */
-  --container: 1280px;    /* content max-width (§5) */
-  --gutter:    24px;      /* page side gutter @ desktop — PLACEHOLDER */
-  --gutter-sm: 16px;      /* page side gutter @ mobile */
+  /* ---- Layout constants — Finovate MEASURED --------------------------------- */
+  --container: 1280px;    /* content max-width → ~80px gutter each side at 1440 */
+  --gutter:    24px;      /* min side padding below (container + 2·gutter) width */
+  --gutter-sm: 20px;      /* page side gutter @ mobile (measured ~20) */
 
-  /* Breakpoints are documented here for reference; media queries use the px.
-     --bp-lg: 1024px ; --bp-sm: 767px  (Finovate, §5) */
+  /* Breakpoints (Finovate): media queries use the px directly.
+     --bp-lg: 1024px ; --bp-sm: 767px */
 
-  /* ---- Spacing scale — PLACEHOLDER (8px base). Section rhythm + gaps come
-          from Finovate measurement (§9); these are conventional stand-ins. ---- */
+  /* ---- Spacing scale (8px base) — utilities ------------------------------- */
   --space-1:  4px;
   --space-2:  8px;
   --space-3:  12px;
@@ -123,36 +127,46 @@
   --space-9:  96px;
   --space-10: 128px;
 
-  --section-pad-y:    clamp(56px, 4vw + 40px, 112px);  /* PLACEHOLDER section rhythm */
-  --section-pad-y-sm: clamp(40px, 8vw, 72px);          /* PLACEHOLDER compact variant */
-  --grid-gap:      24px;   /* PLACEHOLDER */
-  --grid-gap-lg:   32px;   /* PLACEHOLDER */
+  /* Section rhythm — MEASURED. Outer ~48 desktop / ~30 mobile; inner ~30/20.
+     Adjacent alternating sections give the target ~70–80px visual gap. */
+  --section-pad-y:    clamp(30px, 3.3vw, 48px);   /* outer sections */
+  --section-pad-y-sm: clamp(20px, 2.2vw, 30px);   /* inner sub-blocks */
+  --card-pad:  32px;   /* card padding (measured) */
+  --grid-gap:  24px;   /* card/grid gap (measured) */
+  --grid-gap-lg: 32px;
 
-  /* ---- Radii — YSL: SQUARE cards/tiles; pills only for chips & buttons ------ */
-  --radius-card: 0px;      /* YSL profile = square tiles (NOT Finovate's 9px) */
-  --radius-pill: 100px;    /* Finovate pill shape — chips + buttons (§5) */
-  --radius-input: 2px;     /* form fields — near-square to match card language */
+  /* ---- Radii — MEASURED. Square cards + square BUTTONS (per handoff);
+          pills only for chips (Authorities & Forums). --------------------------
+     NB: the reference screenshots show ROUNDED pill buttons; square 0px is
+     applied per the explicit handoff instruction. Flip --radius-btn to
+     var(--radius-pill) to restore pills. */
+  --radius-card: 0px;      /* YSL square tiles */
+  --radius-btn:  0px;      /* MEASURED: square buttons (see note above) */
+  --radius-pill: 100px;    /* chips only */
+  --radius-input: 0px;     /* form fields — square, matching the card language */
 
   /* ---- Borders / elevation ------------------------------------------------- */
   --border:      1px solid var(--line);
   --border-ink:  1px solid var(--line-on-ink);
   --rule-accent: 3px;      /* thickness of the orange brand rule */
-  --shadow-card: 0 1px 2px rgba(17,17,17,.04);           /* PLACEHOLDER */
-  --shadow-card-hover: 0 10px 30px rgba(17,17,17,.10);    /* PLACEHOLDER */
+  --shadow-card: none;                                 /* Finovate cards read flat */
+  --shadow-card-hover: 0 8px 24px rgba(17,17,17,.08);
 
-  /* ---- Motion — PLACEHOLDER. Duration/easing/stagger MUST come from the live
-          demo (§9). Kept conservative until measured. --------------------------*/
-  --dur-fast:   150ms;   /* PLACEHOLDER */
-  --dur:        240ms;   /* PLACEHOLDER — hovers, nav, buttons */
-  --dur-slow:   500ms;   /* PLACEHOLDER — mobile menu, scroll reveals */
-  --ease:       cubic-bezier(.22, .61, .36, 1);  /* PLACEHOLDER (ease-out-ish) */
-  --ease-in-out: cubic-bezier(.65, .05, .36, 1); /* PLACEHOLDER */
-  --reveal-distance: 24px;   /* PLACEHOLDER scroll-in entrance distance */
-  --reveal-stagger:  80ms;   /* PLACEHOLDER per-card stagger */
+  /* ---- Motion — MEASURED durations. -------------------------------------- */
+  --dur-fast:   150ms;
+  --dur:        300ms;   /* hovers, buttons, links (measured 0.3s) */
+  --dur-slow:   500ms;   /* mobile menu, scroll reveals */
+  --dur-header:    150ms;   /* header transform/opacity (measured, linear) */
+  --dur-header-bg: 350ms;   /* header background change (measured) */
+  --ease:        cubic-bezier(.22, .61, .36, 1);  /* ease-out */
+  --ease-in-out: cubic-bezier(.65, .05, .36, 1);
+  --reveal-distance: 24px;   /* scroll-in entrance distance (derived) */
+  --reveal-stagger:  80ms;   /* per-card stagger (derived) */
 
-  /* ---- Header ---- */
-  --header-h:          88px;   /* PLACEHOLDER — normal height (§9 measure) */
-  --header-h-scrolled: 68px;   /* PLACEHOLDER — sticky shrink target */
+  /* ---- Header — MEASURED heights. Hide-on-scroll / reveal-on-scroll-up. --- */
+  --header-h:        80px;    /* inner pages, solid (measured) */
+  --header-h-home:   110px;   /* home, transparent over hero (measured) */
+  --header-h-mobile: 66px;    /* mobile, solid, always visible (measured) */
   --z-header: 100;
   --z-menu:   200;
 }
@@ -195,8 +209,8 @@ img, picture, svg, video { display: block; max-width: 100%; height: auto; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-head);
-  font-weight: var(--fw-semi);
-  line-height: var(--lh-tight);
+  font-weight: var(--fw-heading);     /* headings are LIGHT (400), measured */
+  line-height: var(--lh-heading);     /* ~1.1, measured */
   letter-spacing: var(--ls-tight);
   color: var(--text);
   text-wrap: balance;
@@ -205,7 +219,13 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: var(--fs-h1); }
 h2 { font-size: var(--fs-h2); }
 h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); }
-h4 { font-size: var(--fs-h4); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-medium); }
+
+/* Home hero heading — the one heading at weight 500 (measured 58/58) */
+.h-hero { font-size: var(--fs-hero); line-height: var(--lh-hero); font-weight: var(--fw-hero); }
+
+/* Larger body copy used on service / inner pages (measured 18/1.4) */
+.lead, .prose-lg p { font-size: var(--fs-body-lg); line-height: var(--lh-body); }
 
 p { max-width: 68ch; }
 
@@ -261,11 +281,13 @@ strong, b { font-weight: var(--fw-semi); }
 
 /* Eyebrow label — small, letter-spaced, orange (large text only for contrast) */
 .eyebrow {
+  display: inline-block;
   font-family: var(--font-head);
-  font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-semi);
+  font-size: var(--fs-eyebrow);       /* 11px (measured) */
+  font-weight: var(--fw-medium);      /* 500 (measured) */
+  line-height: 1.8;
   letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;   /* allowed on tiny eyebrow labels only, not headings */
+  text-transform: uppercase;   /* the ONLY uppercase text — allowed on the eyebrow (measured) */
   color: var(--accent-dk);     /* brown for contrast on light; orange reserved for large text */
 }
 .section--ink .eyebrow { color: var(--accent); }
@@ -281,11 +303,11 @@ strong, b { font-weight: var(--fw-semi); }
   font-variant-numeric: tabular-nums;
 }
 
-/* Pill / chip — Finovate pill shape, used for Authorities & Forums + buttons */
+/* Pill / chip — kept as pills for Authorities & Forums chips (CLAUDE.md §5) */
 .pill {
   display: inline-flex; align-items: center; gap: var(--space-2);
   border-radius: var(--radius-pill);
-  padding: 8px 16px;                 /* PLACEHOLDER — measure Finovate chip padding */
+  padding: 9px 18px;
   font-size: var(--fs-small);
   font-weight: var(--fw-medium);
   border: var(--border);
@@ -295,19 +317,20 @@ strong, b { font-weight: var(--fw-semi); }
 }
 .section--ink .pill { border-color: var(--line-on-ink); }
 
-/* Buttons (pill shape). Arrow-button treatment recreated from Finovate later. */
+/* Buttons — MEASURED: SQUARE corners (0px), padding 18/20/20, transition 0.3s.
+   (Reference screenshots show pills; square applied per explicit handoff.) */
 .btn {
   display: inline-flex; align-items: center; gap: var(--space-2);
   font-family: var(--font-head);
-  font-weight: var(--fw-semi);
-  font-size: 0.95rem;
+  font-weight: var(--fw-medium);
+  font-size: 1rem;
   line-height: 1;
-  padding: 15px 26px;                /* PLACEHOLDER — measure Finovate button box */
-  border-radius: var(--radius-pill);
+  padding: 18px 20px 20px;            /* measured */
+  border-radius: var(--radius-btn);   /* 0px (measured) */
   border: 1px solid transparent;
   cursor: pointer;
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
-              border-color var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+              border-color var(--dur) var(--ease);
 }
 .btn--primary { background: var(--accent); color: var(--accent-ink); }
 .btn--primary:hover { background: var(--accent-dk); color: #fff; }
@@ -315,12 +338,13 @@ strong, b { font-weight: var(--fw-semi); }
 .btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 .section--ink .btn--ghost:hover { background: #fff; color: var(--ink); }
 
-/* Card shell — square corners (YSL) */
+/* Card shell — square corners (YSL), flat like Finovate's cards */
 .card {
   background: var(--bg-card);
   border: var(--border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
+  padding: var(--card-pad);
   transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease),
               border-color var(--dur) var(--ease);
 }
@@ -330,22 +354,26 @@ strong, b { font-weight: var(--fw-semi); }
    ------------------------------------------------------------------------- */
 .site-header {
   position: sticky; top: 0; z-index: var(--z-header);
-  /* Near-opaque translucent cream. NB: do NOT use backdrop-filter here — a
-     non-none backdrop-filter makes the header a containing block for
-     fixed-position descendants, which traps the full-screen mobile menu
-     (position:fixed) inside the header box instead of the viewport. */
-  background: color-mix(in srgb, var(--cream) 96%, transparent);
-  border-bottom: 1px solid var(--accent);   /* thin horizontal orange rule (motif) */
-  transition: height var(--dur) var(--ease), background var(--dur) var(--ease);
+  /* MEASURED behaviour: solid, no shadow, no blur; hides on scroll-down and
+     reveals on scroll-up (JS toggles .is-hidden). Transform/opacity 0.15s
+     linear, background-color 0.35s. NB: no backdrop-filter — a non-none
+     backdrop-filter would make the header a containing block for fixed
+     descendants and trap the full-screen mobile menu inside the header box. */
+  background: var(--cream);
+  border-bottom: 1px solid var(--accent);   /* thin horizontal orange rule (YSL motif) */
+  transition: transform var(--dur-header) linear,
+              opacity var(--dur-header) linear,
+              background-color var(--dur-header-bg) linear;
 }
+.site-header.is-hidden { transform: translateY(-100%); }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between;
   gap: var(--space-6);
   height: var(--header-h);
-  transition: height var(--dur) var(--ease);
 }
-.site-header.is-scrolled .site-header__inner { height: var(--header-h-scrolled); }
-.site-header.is-scrolled { background: color-mix(in srgb, var(--cream) 98%, transparent); }
+@media (max-width: 767px) {
+  .site-header__inner { height: var(--header-h-mobile); }  /* ~66px (measured) */
+}
 
 /* Wordmark lock-up: "YASIN SOHL" / "LAW FIRM" with left orange rule (§5) */
 .wordmark { display: inline-flex; align-items: center; gap: var(--space-3); line-height: 1; }

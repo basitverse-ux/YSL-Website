@@ -9,21 +9,30 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- Sticky header: add .is-scrolled past a threshold ------------------ */
+  /* ---- Sticky header: hide on scroll-down, reveal on scroll-up (measured) - */
   var header = document.querySelector("[data-header]");
   if (header) {
-    var TRIGGER = 24; // px — PLACEHOLDER; align with measured Finovate change point
+    var REVEAL_AT = 80;   // don't hide until scrolled past ~one header height
+    var lastY = window.scrollY;
     var ticking = false;
     var onScroll = function () {
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(function () {
-        header.classList.toggle("is-scrolled", window.scrollY > TRIGGER);
+        var y = window.scrollY;
+        // Never hide while the mobile menu is open.
+        if (!document.body.classList.contains("menu-open")) {
+          if (y > lastY && y > REVEAL_AT) {
+            header.classList.add("is-hidden");     // scrolling down
+          } else if (y < lastY) {
+            header.classList.remove("is-hidden");  // scrolling up
+          }
+        }
+        lastY = y;
         ticking = false;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
   }
 
   /* ---- Mobile menu: toggle, focus, Escape, click-out -------------------- */
