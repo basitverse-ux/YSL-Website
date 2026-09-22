@@ -1,0 +1,18 @@
+# Secrets — never commit (brief §6, §8, §12)
+config/config.php
+.env
+*.env
+
+# Finovate reference screenshots — git-ignored per brief §1, §12
+reference/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# PHP / Composer (if PHPMailer vendored later)
+vendor/
+composer.lock
