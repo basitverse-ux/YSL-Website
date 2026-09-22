@@ -1,0 +1,469 @@
+/* ============================================================================
+   YSL — site.css   (single stylesheet; design tokens at top, per CLAUDE.md §1)
+   ----------------------------------------------------------------------------
+   Sources, per CLAUDE.md §5:
+     • Colours, typography, card corners, brand motifs  → YSL profile PDF
+     • Layout / spacing / proportions / motion          → Finovate (MEASURED)
+   ----------------------------------------------------------------------------
+   ⚠ SPACING & MOTION ARE PLACEHOLDERS.  CLAUDE.md §9 step 1 (measure the live
+     Finovate demo) could NOT run here: outbound egress to finovate.vamtam.com
+     is denied by org policy (403 at the proxy). See docs/finovate-measurements.md.
+     Every token below marked `PLACEHOLDER` is a conventional default derived
+     ONLY from constants the brief itself states (container 1280, breakpoints
+     1024/767, 100px pills, square cards) plus a standard modular scale — NOT a
+     measured Finovate value. Replace these once real measurements exist; this
+     :root block is the single point of correction.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. Fonts — self-hosted (CLAUDE.md §5: no Google Fonts CDN). Latin subset.
+      Sora = variable weight axis (one file, all heading weights).
+      IBM Plex Sans = static 400/500/600/700 for body.
+   ------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 100 800;               /* variable axis */
+  font-display: swap;
+  src: url("../fonts/sora-latin-variable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-700.woff2") format("woff2");
+}
+
+/* ---------------------------------------------------------------------------
+   2. Design tokens
+   ------------------------------------------------------------------------- */
+:root {
+  /* ---- Colours — YSL profile PDF (§5). Sampled approximations; swap for
+          exact brand values / logo files when the firm supplies them. -------- */
+  --ink:      #111111;   /* charcoal — dark sections */
+  --ink-2:    #1A1A1A;   /* card surfaces on dark */
+  --cream:    #F5EDE6;   /* light sections */
+  --paper:    #FAF7F4;   /* card surfaces on light */
+  --accent:   #E8912A;   /* orange — rules, numerals, highlights */
+  --accent-dk:#7A4A12;   /* brown — partner strapline tags */
+  --muted:    #6B6B6B;   /* secondary text on light */
+  --line:     #D9D0C7;   /* hairlines on light */
+
+  /* Derived / role tokens (kept so components never hard-code a hex) */
+  --bg:            var(--cream);
+  --bg-card:       var(--paper);
+  --text:          var(--ink);
+  --text-muted:    var(--muted);
+  --text-on-ink:   #F3EFEA;         /* body text on dark sections */
+  --muted-on-ink:  #B9B2AA;
+  --line-on-ink:   #2E2A26;
+  --accent-ink:    #111111;         /* readable text colour to sit ON --accent */
+  --focus-ring:    var(--accent);
+
+  /* ---- Typography — YSL (§5): geometric sans headings, humanist sans body,
+          sentence case. NEVER Finovate's uppercase / Bebas Neue. -------------- */
+  --font-head: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --fw-body:   400;
+  --fw-medium: 500;
+  --fw-semi:   600;
+  --fw-bold:   700;
+
+  /* Fluid type scale — PLACEHOLDER rhythm (major-third-ish), tuned for Sora/Plex.
+     Sizes clamp between the 390px and 1440px targets. Replace ratios/anchors
+     with Finovate's measured type scale (§9) when available. */
+  --fs-h1:    clamp(2.10rem, 1.30rem + 3.6vw, 3.75rem);  /* PLACEHOLDER */
+  --fs-h2:    clamp(1.70rem, 1.15rem + 2.4vw, 2.75rem);  /* PLACEHOLDER */
+  --fs-h3:    clamp(1.35rem, 1.05rem + 1.3vw, 1.90rem);  /* PLACEHOLDER */
+  --fs-h4:    clamp(1.15rem, 1.00rem + 0.7vw, 1.40rem);  /* PLACEHOLDER */
+  --fs-body:  1.0625rem;                                 /* 17px */
+  --fs-small: 0.875rem;                                  /* 14px */
+  --fs-eyebrow: 0.78rem;
+
+  --lh-tight: 1.12;   /* headings */
+  --lh-snug:  1.30;
+  --lh-body:  1.65;   /* PLACEHOLDER — confirm against measured line-length */
+
+  --ls-tight:  -0.01em;
+  --ls-eyebrow: 0.14em;   /* letter-spacing for small eyebrow labels */
+
+  /* ---- Layout constants — Finovate (brief-stated, safe to use now) ---------- */
+  --container: 1280px;    /* content max-width (§5) */
+  --gutter:    24px;      /* page side gutter @ desktop — PLACEHOLDER */
+  --gutter-sm: 16px;      /* page side gutter @ mobile */
+
+  /* Breakpoints are documented here for reference; media queries use the px.
+     --bp-lg: 1024px ; --bp-sm: 767px  (Finovate, §5) */
+
+  /* ---- Spacing scale — PLACEHOLDER (8px base). Section rhythm + gaps come
+          from Finovate measurement (§9); these are conventional stand-ins. ---- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+
+  --section-pad-y:    clamp(56px, 4vw + 40px, 112px);  /* PLACEHOLDER section rhythm */
+  --section-pad-y-sm: clamp(40px, 8vw, 72px);          /* PLACEHOLDER compact variant */
+  --grid-gap:      24px;   /* PLACEHOLDER */
+  --grid-gap-lg:   32px;   /* PLACEHOLDER */
+
+  /* ---- Radii — YSL: SQUARE cards/tiles; pills only for chips & buttons ------ */
+  --radius-card: 0px;      /* YSL profile = square tiles (NOT Finovate's 9px) */
+  --radius-pill: 100px;    /* Finovate pill shape — chips + buttons (§5) */
+  --radius-input: 2px;     /* form fields — near-square to match card language */
+
+  /* ---- Borders / elevation ------------------------------------------------- */
+  --border:      1px solid var(--line);
+  --border-ink:  1px solid var(--line-on-ink);
+  --rule-accent: 3px;      /* thickness of the orange brand rule */
+  --shadow-card: 0 1px 2px rgba(17,17,17,.04);           /* PLACEHOLDER */
+  --shadow-card-hover: 0 10px 30px rgba(17,17,17,.10);    /* PLACEHOLDER */
+
+  /* ---- Motion — PLACEHOLDER. Duration/easing/stagger MUST come from the live
+          demo (§9). Kept conservative until measured. --------------------------*/
+  --dur-fast:   150ms;   /* PLACEHOLDER */
+  --dur:        240ms;   /* PLACEHOLDER — hovers, nav, buttons */
+  --dur-slow:   500ms;   /* PLACEHOLDER — mobile menu, scroll reveals */
+  --ease:       cubic-bezier(.22, .61, .36, 1);  /* PLACEHOLDER (ease-out-ish) */
+  --ease-in-out: cubic-bezier(.65, .05, .36, 1); /* PLACEHOLDER */
+  --reveal-distance: 24px;   /* PLACEHOLDER scroll-in entrance distance */
+  --reveal-stagger:  80ms;   /* PLACEHOLDER per-card stagger */
+
+  /* ---- Header ---- */
+  --header-h:          88px;   /* PLACEHOLDER — normal height (§9 measure) */
+  --header-h-scrolled: 68px;   /* PLACEHOLDER — sticky shrink target */
+  --z-header: 100;
+  --z-menu:   200;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Reset / base
+   ------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Clip the off-canvas menu's horizontal overflow at the root (a fixed element
+     overflows the initial containing block, not <body>). `clip` keeps overflow-y
+     visible, so the viewport stays the scroll container and the sticky header works. */
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* The off-canvas mobile menu is position:fixed + translateX(100%), which sits
+     one viewport-width to the right. `clip` removes that horizontal overflow
+     WITHOUT establishing a scroll container (so the sticky header still works —
+     `hidden` would break it). */
+  overflow-x: clip;
+}
+
+img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--text);
+  text-wrap: balance;
+  /* NB: no text-transform — YSL is sentence case (§5) */
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-snug); }
+
+p { max-width: 68ch; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent-dk); }
+
+ul, ol { padding-left: 1.25em; }
+
+strong, b { font-weight: var(--fw-semi); }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Skip link (accessibility, §8) */
+.skip-link {
+  position: absolute; left: 8px; top: -48px;
+  background: var(--ink); color: var(--text-on-ink);
+  padding: 10px 16px; z-index: 1000;
+  transition: top var(--dur) var(--ease);
+}
+.skip-link:focus { top: 8px; }
+
+/* ---------------------------------------------------------------------------
+   4. Layout primitives
+   ------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@media (max-width: 767px) {
+  .container { padding-inline: var(--gutter-sm); }
+}
+
+.section { padding-block: var(--section-pad-y); }
+.section--compact { padding-block: var(--section-pad-y-sm); }
+
+/* Alternating section tones (§5: alternating dark ink / light cream) */
+.section--light { background: var(--cream); color: var(--ink); }
+.section--paper { background: var(--paper); color: var(--ink); }
+.section--ink   { background: var(--ink);  color: var(--text-on-ink); }
+.section--ink h1, .section--ink h2, .section--ink h3, .section--ink h4 { color: #fff; }
+.section--accent { background: var(--accent); color: var(--accent-ink); }
+
+.stack > * + * { margin-top: var(--space-4); }
+
+/* ---------------------------------------------------------------------------
+   5. Brand components — reusable tokens made visible (motifs, §5)
+   ------------------------------------------------------------------------- */
+
+/* Eyebrow label — small, letter-spaced, orange (large text only for contrast) */
+.eyebrow {
+  font-family: var(--font-head);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;   /* allowed on tiny eyebrow labels only, not headings */
+  color: var(--accent-dk);     /* brown for contrast on light; orange reserved for large text */
+}
+.section--ink .eyebrow { color: var(--accent); }
+
+/* Thin vertical orange brand rule (wordmark motif) */
+.brand-rule-left { border-left: var(--rule-accent) solid var(--accent); padding-left: var(--space-4); }
+
+/* Orange two-digit numeral on cards ("01", "02") */
+.numeral {
+  font-family: var(--font-head);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pill / chip — Finovate pill shape, used for Authorities & Forums + buttons */
+.pill {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;                 /* PLACEHOLDER — measure Finovate chip padding */
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  border: var(--border);
+  background: transparent;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+.section--ink .pill { border-color: var(--line-on-ink); }
+
+/* Buttons (pill shape). Arrow-button treatment recreated from Finovate later. */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-head);
+  font-weight: var(--fw-semi);
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 15px 26px;                /* PLACEHOLDER — measure Finovate button box */
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.btn--primary { background: var(--accent); color: var(--accent-ink); }
+.btn--primary:hover { background: var(--accent-dk); color: #fff; }
+.btn--ghost { background: transparent; color: inherit; border-color: currentColor; }
+.btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.section--ink .btn--ghost:hover { background: #fff; color: var(--ink); }
+
+/* Card shell — square corners (YSL) */
+.card {
+  background: var(--bg-card);
+  border: var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+/* ---------------------------------------------------------------------------
+   6. Header (scaffold) — sticky, thin orange rule under it (§3, §5)
+   ------------------------------------------------------------------------- */
+.site-header {
+  position: sticky; top: 0; z-index: var(--z-header);
+  /* Near-opaque translucent cream. NB: do NOT use backdrop-filter here — a
+     non-none backdrop-filter makes the header a containing block for
+     fixed-position descendants, which traps the full-screen mobile menu
+     (position:fixed) inside the header box instead of the viewport. */
+  background: color-mix(in srgb, var(--cream) 96%, transparent);
+  border-bottom: 1px solid var(--accent);   /* thin horizontal orange rule (motif) */
+  transition: height var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.site-header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-6);
+  height: var(--header-h);
+  transition: height var(--dur) var(--ease);
+}
+.site-header.is-scrolled .site-header__inner { height: var(--header-h-scrolled); }
+.site-header.is-scrolled { background: color-mix(in srgb, var(--cream) 98%, transparent); }
+
+/* Wordmark lock-up: "YASIN SOHL" / "LAW FIRM" with left orange rule (§5) */
+.wordmark { display: inline-flex; align-items: center; gap: var(--space-3); line-height: 1; }
+.wordmark__rule { width: var(--rule-accent); align-self: stretch; background: var(--accent); min-height: 34px; }
+.wordmark__text { display: flex; flex-direction: column; gap: 2px; }
+.wordmark__name {
+  font-family: var(--font-head); font-weight: var(--fw-bold);
+  font-size: 1.05rem; letter-spacing: 0.06em; color: var(--ink);
+}
+.wordmark__sub {
+  font-family: var(--font-head); font-weight: var(--fw-medium);
+  font-size: 0.72rem; letter-spacing: 0.22em; color: var(--muted);
+}
+
+/* Primary nav */
+.nav { display: flex; align-items: center; gap: var(--space-6); }
+.nav__list { display: flex; align-items: center; gap: var(--space-5); list-style: none; padding: 0; margin: 0; }
+.nav__link {
+  font-family: var(--font-head); font-weight: var(--fw-medium);
+  font-size: 0.95rem; color: var(--ink);
+  padding: 6px 2px; position: relative;
+  transition: color var(--dur) var(--ease);
+}
+.nav__link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+.nav__link:hover, .nav__link[aria-current="page"] { color: var(--accent-dk); }
+.nav__link:hover::after, .nav__link[aria-current="page"]::after { transform: scaleX(1); }
+
+/* Hamburger (mobile) */
+.nav-toggle {
+  display: none; width: 44px; height: 44px; border: none; background: transparent;
+  cursor: pointer; align-items: center; justify-content: center;
+}
+.nav-toggle__bars, .nav-toggle__bars::before, .nav-toggle__bars::after {
+  content: ""; display: block; width: 24px; height: 2px; background: var(--ink);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+.nav-toggle__bars::before { transform: translateY(-7px); }
+.nav-toggle__bars::after  { transform: translateY(5px); }
+
+@media (max-width: 1024px) {
+  .nav-toggle { display: inline-flex; }
+  /* Full-screen mobile menu (§3). Behaviour wired in site.js. */
+  .nav {
+    position: fixed; inset: 0; z-index: var(--z-menu);
+    flex-direction: column; justify-content: center; gap: var(--space-6);
+    background: var(--cream);
+    transform: translateX(100%);
+    transition: transform var(--dur-slow) var(--ease-in-out);
+    visibility: hidden;
+  }
+  .nav.is-open { transform: translateX(0); visibility: visible; }
+  .nav__list { flex-direction: column; gap: var(--space-5); }
+  .nav__link { font-size: 1.5rem; }
+  body.menu-open { overflow: hidden; }
+}
+
+/* ---------------------------------------------------------------------------
+   7. Footer (scaffold) — dark, contact block + nav columns (§3)
+   ------------------------------------------------------------------------- */
+.site-footer { background: var(--ink); color: var(--text-on-ink); margin-top: auto; }
+.site-footer a { color: var(--muted-on-ink); transition: color var(--dur) var(--ease); }
+.site-footer a:hover { color: var(--accent); }
+.site-footer__grid {
+  display: grid; gap: var(--space-7);
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  padding-block: var(--space-9) var(--space-7);
+}
+.site-footer__col h4 { color: #fff; font-size: 0.95rem; margin-bottom: var(--space-4); }
+.site-footer__nav { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-2); }
+.site-footer__bottom {
+  border-top: var(--border-ink); padding-block: var(--space-5);
+  display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: space-between;
+  font-size: var(--fs-small); color: var(--muted-on-ink);
+}
+@media (max-width: 1024px) { .site-footer__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 767px)  { .site-footer__grid { grid-template-columns: 1fr; gap: var(--space-6); } }
+
+/* ---------------------------------------------------------------------------
+   8. Scroll-reveal hook (IntersectionObserver adds .is-visible) — §5, §8
+   ------------------------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(var(--reveal-distance)); }
+.reveal.is-visible {
+  opacity: 1; transform: none;
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+
+/* Visible content-TODO marker (CLAUDE.md §0.4 — never invent, flag instead) */
+.todo {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.85em; font-weight: var(--fw-medium);
+  color: #8a1f00; background: #ffe9c7;
+  border: 1px dashed var(--accent-dk);
+  padding: 1px 6px; border-radius: 2px;
+}
+.section--ink .todo { color: #ffd9a3; background: #3a2a12; border-color: var(--accent); }
+
+/* ---------------------------------------------------------------------------
+   9. Scaffold notice (Milestone 1 only — removed once templates land)
+   ------------------------------------------------------------------------- */
+.scaffold-note { padding-block: var(--space-9); }
+.scaffold-note code { background: var(--paper); border: var(--border); padding: 2px 6px; font-size: 0.9em; }
+.scaffold-note ul { max-width: 68ch; }
+
+/* ---------------------------------------------------------------------------
+   10. Reduced motion — everything off (§5, §8)
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}

@@ -1,0 +1,21 @@
+{
+  "_note": "Single source for name, contact, socials. All contact values below are UNVERIFIED blockers (CLAUDE.md §10 / CONTENT-TODO). Left empty so pages render honest [[TODO]] markers until the firm confirms. Filling any one value is a one-line change — do NOT hard-code contact details anywhere else.",
+  "name": "Yasin Sohl Law Firm",
+  "short_name": "YSL",
+  "base_url": "",
+  "canonical_host": "",
+  "tagline": "Litigation • Corporate Advisory • Regulatory Compliance",
+  "founded": "1991",
+  "contact": {
+    "address": "",
+    "city": "Lahore",
+    "region": "Punjab",
+    "country": "PK",
+    "phone": "",
+    "whatsapp": "",
+    "email": "",
+    "map_url": "",
+    "map_embed": ""
+  },
+  "social": {}
+}

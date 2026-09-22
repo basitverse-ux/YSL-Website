@@ -1,0 +1,68 @@
+[
+  {
+    "_stub": "Milestone 1 structural stub. slug/name/group/order are fixed (CLAUDE.md §1, §2). honorific/role/strapline/summary/profile/principal_areas/photo are CONTENT — populated in the Milestone 3 data pass from the content doc + profile PDF pp.05–06. Empty here so nothing is invented (§0.4). The founder (group:\"founder\") renders on The Firm, NOT on People, and is excluded from the /people/{slug} route.",
+    "slug": "haaris-sohl",
+    "name": "Haaris Sohl",
+    "honorific": "",
+    "role": "",
+    "strapline": "",
+    "summary": "",
+    "profile": [],
+    "principal_areas": [],
+    "photo": "",
+    "group": "partner",
+    "order": 1
+  },
+  {
+    "slug": "asharib-sohl",
+    "name": "Asharib Sohl",
+    "honorific": "",
+    "role": "",
+    "strapline": "",
+    "summary": "",
+    "profile": [],
+    "principal_areas": [],
+    "photo": "",
+    "group": "partner",
+    "order": 2
+  },
+  {
+    "slug": "hussain-iqbal",
+    "name": "Hussain Iqbal",
+    "honorific": "",
+    "role": "",
+    "strapline": "",
+    "summary": "",
+    "profile": [],
+    "principal_areas": [],
+    "photo": "",
+    "group": "partner",
+    "order": 3
+  },
+  {
+    "slug": "roshaan-javaid-cheema",
+    "name": "Roshaan Javaid Cheema",
+    "honorific": "",
+    "role": "",
+    "strapline": "",
+    "summary": "",
+    "profile": [],
+    "principal_areas": [],
+    "photo": "",
+    "group": "partner",
+    "order": 4
+  },
+  {
+    "slug": "muhammad-yasin-sohl",
+    "name": "Muhammad Yasin Sohl",
+    "honorific": "",
+    "role": "Founder",
+    "strapline": "",
+    "summary": "",
+    "profile": [],
+    "principal_areas": [],
+    "photo": "",
+    "group": "founder",
+    "order": 0
+  }
+]

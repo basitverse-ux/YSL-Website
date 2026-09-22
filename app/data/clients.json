@@ -1,0 +1,13 @@
+{
+  "_note": "Milestone 1 structural stub. Sectors from website-structure.md §4. Client NAMES/LOGOS appear only where written consent is held (CLAUDE.md §4, structure §4). At launch assume NO consent — every client's \"consent\" stays false and no logo/name renders. Sector descriptions are unattributed copy to DRAFT in Milestone 3.",
+  "sectors": [
+    { "slug": "utilities-energy", "name": "Utilities & Energy", "description": "" },
+    { "slug": "urban-development-real-estate", "name": "Urban Development & Real Estate", "description": "" },
+    { "slug": "manufacturing-textiles", "name": "Manufacturing & Textiles", "description": "" },
+    { "slug": "healthcare-pharmaceutical", "name": "Healthcare & Pharmaceutical", "description": "" },
+    { "slug": "retail-food-beverage", "name": "Retail & F&B", "description": "" },
+    { "slug": "public-sector-cantonment", "name": "Public Sector & Cantonment Administration", "description": "" },
+    { "slug": "education", "name": "Education", "description": "" }
+  ],
+  "clients": []
+}

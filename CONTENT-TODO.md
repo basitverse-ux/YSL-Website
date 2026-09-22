@@ -23,6 +23,15 @@ _Last updated: 2026-09-22_
 - [ ] **All other photography** — none licensed; shoot recommended. Do NOT reuse the PDF's Dublin/Pantheon stock or any Finovate demo image.
 - [ ] **Brand fonts / exact colours / logo files** — firm to supply (see "Decisions locked").
 
+## Build-environment blocker (NOT content — flagged here for visibility)
+- [ ] **Finovate measurements (§9 step 1) not captured** — this build environment's egress
+  policy denies `finovate.vamtam.com` (403 at the proxy), so no screenshots / computed
+  styles could be taken. `assets/css/site.css` `:root` ships with **placeholder** spacing,
+  type-scale and motion tokens (each marked `PLACEHOLDER`), built only from constants the
+  brief states (container 1280, breakpoints 1024/767, 100px pills, square cards) + a standard
+  modular scale — **not measured values**. Layout will not match Finovate until these are
+  replaced. To unblock, see the boxed note atop `docs/finovate-measurements.md`.
+
 ## Content to produce / verify
 - [ ] Home condensed positioning paragraph (condense the full Introduction; do not duplicate The Firm).
 - [ ] Practice-areas: **split** Civil & Criminal → *Civil & Commercial Litigation* + *Criminal Defence & White-Collar Crime* (divide + lightly rewrite); **merge** Employment + Industrial Disputes → *Employment, Labour & Industrial Relations* (combine + dedupe); **rename** the two "Regulatory Compliance" entries → *Taxation & Revenue Disputes* and *Regulatory & Administrative Law*.

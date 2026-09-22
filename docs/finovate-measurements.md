@@ -1,5 +1,29 @@
 # Finovate Measurements (source for spacing + motion tokens)
 
+> ## ⛔ CAPTURE BLOCKED — egress policy (2026-09-22)
+> §9 step 1's live capture **could not run in this environment**. The session's outbound
+> HTTPS goes through a policy-enforcing proxy whose allow-list covers only package
+> registries (npm, PyPI, crates, …), the Anthropic API and GitHub. Every general host —
+> `finovate.vamtam.com`, `vamtam.com`, even `example.com` — is denied at CONNECT with
+> HTTP 403 (org egress policy). Confirmed via `curl` and the proxy status endpoint
+> (`recentRelayFailures`: `connect_rejected … finovate.vamtam.com:443`). Per the proxy
+> README, policy denials must not be retried or routed around.
+>
+> **Consequence:** no screenshots, no computed styles, no `docs/finovate-raw-measurements.json`.
+> The measurement tables below stay `[[TODO: measure]]`. `assets/css/site.css` ships with a
+> clearly-labelled **placeholder** spacing/motion scale (built only from the constants the
+> brief itself states — container 1280px, breakpoints 1024/767px, 100px pills, square cards —
+> plus a conventional modular scale), NOT from measured Finovate values. These tokens are the
+> single point to correct once real measurements exist.
+>
+> **To unblock (either):**
+> 1. Re-run this task in an environment whose network policy allows `finovate.vamtam.com`
+>    (and its asset host). Then: `npm i -D playwright` and `node tools/finovate-measure.mjs`,
+>    transcribe distilled values into the tables below, and update the `:root` tokens in
+>    `site.css` marked `/* PLACEHOLDER … */`.
+> 2. Or capture the demo locally (any machine with internet), commit
+>    `docs/finovate-raw-measurements.json` + `reference/*.png`, and I'll transcribe.
+
 Per CLAUDE.md §9 step 1. **All values below are `[[TODO: measure]]` until captured from the live demo**
 (https://finovate.vamtam.com) with Playwright once web egress is enabled — see `tools/finovate-measure.mjs`.
 Only sections we KEEP (per `docs/layout-reference.md`) are measured. No value here may be invented; unmeasured

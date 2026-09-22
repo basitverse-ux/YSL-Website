@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitemap generated from routes + data (CLAUDE.md §7). Absolute URL required.
+# Update the host here at launch to match the canonical host (site.json base_url).
+Sitemap: https://www.yasinsohllaw.com/sitemap.xml

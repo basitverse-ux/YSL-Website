@@ -1,0 +1,135 @@
+[
+  {
+    "_stub": "Milestone 1 structural stub. slug/title are fixed (CLAUDE.md §2). descriptor/overview/authorities/related/meta_description are CONTENT — populated in the Milestone 3 data pass from the practice-areas doc + theme-mapping §4. Kept empty here so nothing is invented (§0.4); templates must show [[TODO]] for any empty field they render.",
+    "slug": "civil-commercial-litigation",
+    "title": "Civil & Commercial Litigation",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 1
+  },
+  {
+    "slug": "criminal-defence-white-collar",
+    "title": "Criminal Defence & White-Collar Crime",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 2
+  },
+  {
+    "slug": "corporate-commercial-advisory",
+    "title": "Corporate & Commercial Advisory",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 3
+  },
+  {
+    "slug": "mergers-acquisitions",
+    "title": "Mergers & Acquisitions",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 4
+  },
+  {
+    "slug": "banking-finance",
+    "title": "Banking & Finance",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 5
+  },
+  {
+    "slug": "taxation-revenue-disputes",
+    "title": "Taxation & Revenue Disputes",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 6
+  },
+  {
+    "slug": "regulatory-administrative",
+    "title": "Regulatory & Administrative Law",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 7
+  },
+  {
+    "slug": "healthcare-pharmaceutical",
+    "title": "Healthcare & Pharmaceutical",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 8
+  },
+  {
+    "slug": "real-estate-construction-engineering",
+    "title": "Real Estate, Construction & Engineering",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 9
+  },
+  {
+    "slug": "employment-labour-industrial-relations",
+    "title": "Employment, Labour & Industrial Relations",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 10
+  },
+  {
+    "slug": "intellectual-property-trademarks",
+    "title": "Intellectual Property & Trademarks",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 11
+  },
+  {
+    "slug": "arbitration-dispute-resolution",
+    "title": "Arbitration & Dispute Resolution",
+    "descriptor": "",
+    "icon": null,
+    "overview": [],
+    "authorities": [],
+    "related": [],
+    "meta_description": "",
+    "order": 12
+  }
+]
